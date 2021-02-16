@@ -1,13 +1,14 @@
 <!doctype html>
 <html>
     <head>
-        <meta name="robots" content="noindex,nofollow">
+        <meta name="robots" content="noindex, nofollow">
+        <meta charset="UTF-8">
         <title>AJAX Pet Starter</title>
         <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
         <script type="text/javascript">
             $("document").ready(function(){
-                $("pet_home").hide();
-                $("pet_diet").hide();
+                $("#pet_home").hide();
+                $("#pet_diet").hide();
 
                 $("#pet_feels").click(function(e){
                     $("pet_home").slideDown(200);
@@ -17,7 +18,7 @@
                     let feels = $("input[name=feels]:checked").val();
                     let place = $("input[name=place]:checked").val();
                     let eats = $("input[name=eats]:checked").val();
-                    let pet = "";
+                    let pet = "null";
 
                     if(feels == "fluffy" && place == "forest" && eats == "veggies") {
                         pet = "a rabbit";
@@ -66,6 +67,7 @@
             <input type="radio" name="eats" value="both"> an omnivore <br/>
         </div>
 
+        <br/>
         <input type="submit" value="submit it!"/>
         <div id="output">Output goes here!</div>
     </form>
