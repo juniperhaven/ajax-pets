@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow">
+        <title>AJAX Pet Starter</title>
+        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $("document").ready(function(){
+                $("pet_home").hide();
+                $("pet_diet").hide();
+
+                $("#pet_feels").click(function(e){
+                    $("pet_home").slideDown(200);
+                });
+
+                $('#myForm').submit(function(e){
+                    let feels = $("input[name=feels]:checked").val();
+                    let place = $("input[name=place]:checked").val();
+                    let eats = $("input[name=eats]:checked").val();
+                    let pet = "";
+
+                    if(feels == "fluffy" && place == "forest" && eats == "veggies") {
+                        pet = "a rabbit";
+                    }
+                    
+                    let output = "";
+
+                    output += `<p>Your pet feels: ${feels}</p>`;
+                    output += `<p>Your pet comes from: the ${place}</p>`;
+                    output += `<p>Your pet eats: ${eats}</p>`;
+                    output += "<p> Your pet is " + pet + "!";
+
+                    $("#output").html(output);
+
+                    e.preventDefault(); //no need to submit as you'll be doing AJAX on this page
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+    <h2>AJAX Pet Starter</h2>
+    <form id="myForm" name="myForm" action="form-handler.php" method="post">
+        <p>Below is a starter page for the AJAX Pet Adoption Agency assignment.</p>
+        <div id="pet_feels">
+            <h3>Feels</h3>
+            <p>Would you like your pet to feel...</p>
+            <input type="radio" name="feels" value="fluffy"> fluffy <br/>
+            <input type="radio" name="feels" value="scaly"> scaly <br/>
+            <input type="radio" name="feels" value="other"> neither <br/>
+        </div>
+
+        <div id="pet_home">
+            <h3>Place of Origin</h3>
+            <p>Would you like your pet to come from...</p>
+            <input type="radio" name="place" value="mountains"> the mountains <br/>
+            <input type="radio" name="place" value="savannah"> the savannah <br/>
+            <input type="radio" name="place" value="forest"> the forest <br/>
+        </div>
+
+        <div id="pet_diet">
+            <h3>Diet</h3>
+            <p>Would you like your pet to be...</p>
+            <input type="radio" name="eats" value="veggies"> an herbivore <br/>
+            <input type="radio" name="eats" value="meat"> a carnivore <br/>
+            <input type="radio" name="eats" value="both"> an omnivore <br/>
+        </div>
+
+        <input type="submit" value="submit it!"/>
+        <div id="output">Output goes here!</div>
+    </form>
+    </body>
+</html>
