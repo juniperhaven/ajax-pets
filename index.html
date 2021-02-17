@@ -4,14 +4,18 @@
         <meta name="robots" content="noindex, nofollow">
         <meta charset="UTF-8">
         <title>AJAX Pet Starter</title>
-        <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
         <script type="text/javascript">
             $("document").ready(function(){
                 $("#pet_home").hide();
                 $("#pet_diet").hide();
 
                 $("#pet_feels").click(function(e){
-                    $("pet_home").slideDown(200);
+                    $("#pet_home").slideDown(200);
+                });
+
+                $("#pet_home").click(function(e){
+                    $("#pet_diet").slideDown(200);
                 });
 
                 $('#myForm').submit(function(e){
@@ -21,7 +25,28 @@
                     let pet = "null";
 
                     if(feels == "fluffy" && place == "forest" && eats == "veggies") {
-                        pet = "a rabbit";
+                        pet = "rabbit";
+                    }
+                    else if(feels == "fluffy" && place == "forest" && eats == "meat") {
+                        pet = "fox";
+                    }
+                    else if(feels == "fluffy" && place == "forest" && eats == "anything") {
+                        pet = "opossum";
+                    }
+                    else if(feels == "fluffy" && place == "mountains" && eats == "veggies") {
+                        pet = "guinea pig";
+                    }
+                    else if(feels == "fluffy" && place == "mountains" && eats == "meat") {
+                        pet = "cougar";
+                    }
+                    else if(feels == "fluffy" && place == "mountains" && eats == "anything") {
+                        pet = "hyrax";
+                    }
+                    else if(feels == "scaly" && place == "forest" && eats == "forest") {
+                        pet = "snake";
+                    }
+                    else if(feels == "other" && place == "forest" && eats == "meat") {
+                        pet = "barn owl";
                     }
                     
                     let output = "";
@@ -29,9 +54,11 @@
                     output += `<p>Your pet feels: ${feels}</p>`;
                     output += `<p>Your pet comes from: the ${place}</p>`;
                     output += `<p>Your pet eats: ${eats}</p>`;
-                    output += "<p> Your pet is " + pet + "!";
+                    output += `<p>Your pet is a: ${pet}!</p>`;
 
                     $("#output").html(output);
+
+                    $('#pet').load(`includes/content.html #${pet}`);
 
                     e.preventDefault(); //no need to submit as you'll be doing AJAX on this page
                 });
@@ -46,7 +73,7 @@
         <div id="pet_feels">
             <h3>Feels</h3>
             <p>Would you like your pet to feel...</p>
-            <input type="radio" name="feels" value="fluffy"> fluffy <br/>
+            <input type="radio" name="feels" value="fluffy" required = "required"> fluffy <br/>
             <input type="radio" name="feels" value="scaly"> scaly <br/>
             <input type="radio" name="feels" value="other"> neither <br/>
         </div>
@@ -54,21 +81,22 @@
         <div id="pet_home">
             <h3>Place of Origin</h3>
             <p>Would you like your pet to come from...</p>
+            <input type="radio" name="place" value="forest" required = "required"> the forest <br/>
             <input type="radio" name="place" value="mountains"> the mountains <br/>
             <input type="radio" name="place" value="savannah"> the savannah <br/>
-            <input type="radio" name="place" value="forest"> the forest <br/>
         </div>
 
         <div id="pet_diet">
             <h3>Diet</h3>
             <p>Would you like your pet to be...</p>
-            <input type="radio" name="eats" value="veggies"> an herbivore <br/>
+            <input type="radio" name="eats" value="veggies" required = "required"> an herbivore <br/>
             <input type="radio" name="eats" value="meat"> a carnivore <br/>
-            <input type="radio" name="eats" value="both"> an omnivore <br/>
+            <input type="radio" name="eats" value="anything"> an omnivore <br/>
         </div>
 
         <br/>
         <input type="submit" value="submit it!"/>
+        <div id="pet">Pet picture goes here</div>
         <div id="output">Output goes here!</div>
     </form>
     </body>
