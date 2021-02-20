@@ -19,7 +19,7 @@
   Background color of body, #52F3FF, matches header and footer currently
   You'll likely want to change this, to match colors there.
 */
- 
+
 body {font-size: .9em; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; padding:0; margin:0; background-color:#ffffff;}
 
 td {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
@@ -32,3 +32,7 @@ a:link {color: #00f;}
 a:visited {color: #36f;}
 a:hover {text-decoration: none;}
 a:active {color: #f00;}
+
+img {
+  max-width: 45%;
+}

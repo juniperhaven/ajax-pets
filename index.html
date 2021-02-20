@@ -4,11 +4,13 @@
         <meta name="robots" content="noindex, nofollow">
         <meta charset="UTF-8">
         <title>AJAX Pet Starter</title>
+        <link rel="stylesheet" href="includes/styles.css"/>
         <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
         <script type="text/javascript">
             $("document").ready(function(){
                 $("#pet_home").hide();
                 $("#pet_diet").hide();
+                $("#pet_name").hide();
 
                 $("#pet_feels").click(function(e){
                     $("#pet_home").slideDown(200);
@@ -18,11 +20,15 @@
                     $("#pet_diet").slideDown(200);
                 });
 
+                $("#pet_diet").click(function(e) {
+                    $("#pet_name").slideDown(200);
+                });
+
                 $('#myForm').submit(function(e){
                     let feels = $("input[name=feels]:checked").val();
                     let place = $("input[name=place]:checked").val();
                     let eats = $("input[name=eats]:checked").val();
-                    // let name = get value from name input box
+                    let name = $("input[name=name]").val();
                     let pet = "null";
 
                     if(feels == "fluffy" && place == "forest" && eats == "veggies") {
@@ -43,44 +49,85 @@
                     else if(feels == "fluffy" && place == "mountains" && eats == "anything") {
                         pet = "hyrax";
                     }
-                    // african savanna hare
-                    // mongoose
-                    // honey badger
-                    else if(feels == "scaly" && place == "forest" && eats == "forest") {
+                    else if(feels == "fluffy" && place == "savanna" && eats == "veggies") {
+                        pet = "African savanna hare";
+                    }
+                    else if(feels == "fluffy" && place == "savanna" && eats == "meat") {
+                        pet = "mongoose";
+                    }
+                    else if(feels == "fluffy" && place == "savanna" && eats == "anything") {
+                        pet = "honey badger";
+                    }
+                    else if(feels == "scaly" && place == "forest" && eats == "veggies") {
                         pet = "green iguana";
                     }
-                    // komodo dragon
-                    // blue-tongued skink
-                    // bog turtle
-                    // snapping turtle
-                    // western skink
-                    // leopard tortoise
-                    // rock python
-                    // armadillo
-                    // hedgehog
-                    // pig
-                    // woodpecker
-                    // moose
+                    else if(feels == "scaly" && place == "forest" && eats == "meat") {
+                        pet = "komodo dragon";
+                    }
+                    else if(feels == "scaly" && place == "forest" && eats == "anything") {
+                        pet = "blue-tongued skink";
+                    }
+                    else if(feels == "scaly" && place == "mountains" && eats == "veggies") {
+                        pet = "bog turtle";
+                    }
+                    else if(feels == "scaly" && place == "mountains" && eats == "meat") {
+                        pet = "garter snake";
+                    }
+                    else if(feels == "scaly" && place == "mountains" && eats == "anything") {
+                        pet = "western skink";
+                    }
+                    else if(feels == "scaly" && place == "savanna" && eats == "veggies") {
+                        pet = "leopard tortoise";
+                    }
+                    else if(feels == "scaly" && place == "savanna" && eats == "meat") {
+                        pet = "rock python";
+                    }
+                    else if(feels == "scaly" && place == "savanna" && eats == "anything") {
+                        pet = "armadillo";
+                    }
+                    else if(feels == "other" && place == "forest" && eats == "veggies") {
+                        pet = "hedgehog";
+                    }
+                    else if(feels == "other" && place == "forest" && eats == "meat") {
+                        pet = "true toad";
+                    }
+                    else if(feels == "other" && place == "forest" && eats == "anything") {
+                        pet = "pig";
+                    }
+                    else if(feels == "other" && place == "mountains" && eats == "veggies") {
+                        pet = "moose";
+                    }
                     else if(feels == "other" && place == "mountains" && eats == "meat") {
                         pet = "barn owl";
                     }
-                    // mountain frog
-                    // ostrich
-                    // tiger salamander
-                    // bushpig
+                    else if(feels == "other" && place == "mountains" && eats == "anything") {
+                        pet = "mountain frog";
+                    }
+                    else if(feels == "other" && place == "savanna" && eats == "veggies") {
+                        pet = "elephant";
+                    }
+                    else if(feels == "other" && place == "savanna" && eats == "meat") {
+                        pet = "tiger salamander";
+                    }
+                    else if(feels == "other" && place == "savanna" && eats == "anything") {
+                        pet = "ostrich";
+                    }
 
-                    pet = pet.replace(/\s+/g, '-').toLowerCase();             
                     let output = "";
+                    let pic = pet.replace(/\s+/g, '-').toLowerCase();
+                    console.log(pic);
 
                     output += `<p>Your pet feels: ${feels}</p>`;
                     output += `<p>Your pet comes from: the ${place}</p>`;
                     output += `<p>Your pet eats: ${eats}</p>`;
-                    output += `<p>Your pet is a: ${pet}!</p>`;
-                    // output += `<p>Your pet's name is: ${name}!</p>`;
+                    output += `<p>Your pet is a(n): ${pet}!</p>`;
+                    output += `<p>Your pet's name is: ${name}!</p>`;
 
                     $("#output").html(output);
+                    
+                    $('#pet').load(`includes/content.html #${pic}`);
 
-                    $('#pet').load(`includes/content.html #${pet}`);
+                    $("#myForm").trigger("reset");
 
                     e.preventDefault(); //no need to submit as you'll be doing AJAX on this page
                 });
@@ -116,7 +163,11 @@
             <input type="radio" name="eats" value="anything"> an omnivore <br/>
         </div>
 
-        <!-- new question here -->
+        <div id="pet_name">
+            <h3>Name</h3>
+            <p>What would you like your pet's name to be?</p>
+            <input type="text" name="name" required = "required"><br/>
+        </div>
 
         <br/>
         <input type="submit" value="submit it!"/>
