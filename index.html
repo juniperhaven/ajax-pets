@@ -29,7 +29,7 @@
                     let place = $("input[name=place]:checked").val();
                     let eats = $("input[name=eats]:checked").val();
                     let name = $("input[name=name]").val();
-                    let pet = "null";
+                    let pet = "";
 
                     if(feels == "fluffy" && place == "forest" && eats == "veggies") {
                         pet = "rabbit";
@@ -115,7 +115,6 @@
 
                     let output = "";
                     let pic = pet.replace(/\s+/g, '-').toLowerCase();
-                    console.log(pic);
 
                     output += `<p>Your pet feels: ${feels}</p>`;
                     output += `<p>Your pet comes from: the ${place}</p>`;
